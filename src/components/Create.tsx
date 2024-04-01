@@ -1,7 +1,7 @@
 import * as React from "react";
-import {useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {useNavigate} from "react-router";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -9,13 +9,13 @@ import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import {createTheme, ThemeProvider} from "@mui/material/styles";
-import {addUser} from "../redux/Reducer";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { addUser } from "../redux/Reducer";
 
 interface FormData {
   name: string;
   email: string;
-  age: string;
+  phone: string;
   address: string;
 }
 
@@ -26,12 +26,12 @@ interface Props {
 const initialState: FormData = {
   name: "",
   email: "",
-  age: "",
+  phone: "",
   address: "",
 };
 
 const defaultTheme = createTheme();
-const Create: React.FC<Props> = ({onSubmit}) => {
+const Create: React.FC<Props> = ({ onSubmit }) => {
   const [formData, setFormData] = useState<FormData>(initialState);
   const [formErrors, setFormErrors] = useState<Partial<FormData>>({});
   const dispatch = useDispatch();
@@ -39,9 +39,9 @@ const Create: React.FC<Props> = ({onSubmit}) => {
   const navigate = useNavigate();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const {name, value} = event.target;
-    setFormData((prevFormData) => ({...prevFormData, [name]: value}));
-    setFormErrors((prevFormErrors) => ({...prevFormErrors, [name]: ""}));
+    const { name, value } = event.target;
+    setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
+    setFormErrors((prevFormErrors) => ({ ...prevFormErrors, [name]: "" }));
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -60,9 +60,9 @@ const Create: React.FC<Props> = ({onSubmit}) => {
 
     onSubmit(formData);
     setFormData(initialState);
-    const {name, email, age, address} = formData;
+    const { name, email, phone, address } = formData;
     dispatch(
-      addUser({id: users[users.length - 1].id + 1, name, email, age, address})
+      addUser({ id: users[users.length - 1].id + 1, name, email, phone, address })
     );
     navigate("/alldetails");
   };
@@ -79,7 +79,7 @@ const Create: React.FC<Props> = ({onSubmit}) => {
             alignItems: "center",
           }}
         >
-          <Avatar sx={{m: 1, bgcolor: "secondary.main"}}></Avatar>
+          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}></Avatar>
           <Typography component="h1" variant="h5">
             Add new record
           </Typography>
@@ -109,12 +109,12 @@ const Create: React.FC<Props> = ({onSubmit}) => {
             <TextField
               margin="normal"
               fullWidth
-              name="age"
-              label="Age"
-              autoComplete="age"
+              name="phone"
+              label="Phone"
+              autoComplete="phone"
               onChange={handleChange}
-              error={Boolean(formErrors.age)}
-              helperText={formErrors.age}
+              error={Boolean(formErrors.phone)}
+              helperText={formErrors.phone}
             />
             <TextField
               margin="normal"

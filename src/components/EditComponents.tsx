@@ -1,15 +1,9 @@
-import React, {useState, useEffect} from "react";
-import {
-  Button,
-  TextField,
-  Typography,
-  Box,
-  Avatar,
-} from "@mui/material";
-import {useNavigate, useParams} from "react-router";
-import {useDispatch, useSelector} from "react-redux";
-import {updateUser} from "../redux/Reducer";
-import {createTheme, ThemeProvider} from "@mui/material/styles";
+import React, { useState, useEffect } from "react";
+import { Button, TextField, Typography, Box, Avatar } from "@mui/material";
+import { useNavigate, useParams } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { updateUser } from "../redux/Reducer";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Container from "@mui/material/Container";
 import CssBaseline from "@mui/material/CssBaseline";
 
@@ -17,7 +11,7 @@ interface FormData {
   id: number;
   name: string;
   email: string;
-  age: string;
+  phone: string;
   address: string;
 }
 
@@ -28,14 +22,14 @@ interface Props {
 const initialState: FormData = {
   name: "",
   email: "",
-  age: "",
+  phone: "",
   address: "",
   id: 0,
 };
 const defaultTheme = createTheme();
-const  EditComponents = () => {
+const EditComponents = () => {
   const users = useSelector((state: any) => state?.users);
-  const {id} = useParams();
+  const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [formData, setFormData] = useState<FormData>(initialState);
@@ -44,13 +38,13 @@ const  EditComponents = () => {
   console.log(formData, "formData");
   useEffect(() => {
     const existingData = users.filter(
-      (idx: {id: number | string}) => idx.id == id
+      (idx: { id: number | string }) => idx.id == id
     );
     console.log(existingData, "exist");
 
     if (existingData.length > 0) {
-      const {id, name, email, age, address} = existingData[0];
-      setFormData({id, name, email, age, address});
+      const { id, name, email, phone, address } = existingData[0];
+      setFormData({ id, name, email, phone, address });
     }
     setDataFetched(true);
   }, [id, users]);
@@ -62,7 +56,7 @@ const  EditComponents = () => {
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const {name, value} = event.target;
+    const { name, value } = event.target;
     setFormData((prevFormData) => ({
       ...prevFormData,
       [name]: value,
@@ -85,7 +79,7 @@ const  EditComponents = () => {
             alignItems: "center",
           }}
         >
-          <Avatar sx={{m: 1, bgcolor: "secondary.main"}}></Avatar>
+          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}></Avatar>
           <Typography component="h1" variant="h5">
             Update Record
           </Typography>
@@ -112,9 +106,9 @@ const  EditComponents = () => {
               fullWidth
               margin="normal"
               type="number"
-              label="Age"
-              name="age"
-              value={formData.age}
+              label="Phone"
+              name="phone"
+              value={formData.phone}
               onChange={handleChange}
             />
 
@@ -135,6 +129,6 @@ const  EditComponents = () => {
       </Container>
     </ThemeProvider>
   );
-}
+};
 
 export default EditComponents;

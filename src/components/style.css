@@ -4,16 +4,21 @@
 
 .details-container {
     padding: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .btn-large {
     width: 200px;
     height: 60px;
     font-size: 1.6rem !important;
-    background-color: black;
+    background-color: rgb(34, 101, 179);
     color: white;
     border-radius: 80px;
     cursor: pointer;
+    border: none;
+    
 }
 
 .home-btn {

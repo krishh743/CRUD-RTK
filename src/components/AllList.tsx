@@ -7,11 +7,11 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import {useDispatch, useSelector} from "react-redux";
-import {useNavigate} from "react-router";
-import {Link} from "react-router-dom";
-import {removeUser} from "../redux/Reducer";
-import {Stack, TablePagination} from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
+import { removeUser } from "../redux/Reducer";
+import { Stack, TablePagination } from "@mui/material";
 import "./style.css";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -19,7 +19,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Slide from "@mui/material/Slide";
-import {TransitionProps} from "@mui/material/transitions";
+import { TransitionProps } from "@mui/material/transitions";
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -68,15 +68,20 @@ const Home = () => {
 
   return (
     <div className="details-container">
-      <div>
-        <h1>All Details You Can Manage Here...</h1>
-        <span className="text">
-          There are Total 4 Buttons for Create, Edit, View, Delete and for
-          create button will add new data to the database and edit button will
-          update the previous data and delete button to perform delete any
-          record.
-        </span>
-        <Stack marginBottom={4}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        {/* <Stack marginBottom={4} style={{display:"flex",justifyContent:"flex-end "}}> */}
+        <div style={{ fontSize: "20px" }}>
+          Employee{" "}
+          <span style={{ fontSize: "20px", fontWeight: "bold" }}>Details</span>
+        </div>
+
+        <div>
           <button
             onClick={() => {
               navigate("/create");
@@ -85,13 +90,15 @@ const Home = () => {
           >
             Add New
           </button>
-        </Stack>
+        </div>
+
+        {/* </Stack> */}
       </div>
-      <TableContainer component={Paper} sx={{backgroundColor: "grey"}}>
+      <TableContainer component={Paper} sx={{ backgroundColor: "grey" }}>
         <Table aria-label="simple table">
-          <TableHead sx={{backgroundColor: "black"}}>
+          <TableHead sx={{ backgroundColor: "black" }}>
             <TableRow>
-              <TableCell className="row-style">User ID</TableCell>
+              <TableCell className="row-style">Emp id</TableCell>
               <TableCell className="row-style" align="right">
                 Name
               </TableCell>
@@ -99,13 +106,13 @@ const Home = () => {
                 Email ID
               </TableCell>
               <TableCell className="row-style" align="right">
-                age
+              Phone 
               </TableCell>
               <TableCell className="row-style" align="right">
                 Address
               </TableCell>
               <TableCell
-                sx={{color: "white", fontSize: "1.2rem"}}
+                sx={{ color: "white", fontSize: "1.2rem" }}
                 align="right"
               >
                 Action
@@ -122,7 +129,7 @@ const Home = () => {
             ).map((row: any) => (
               <TableRow
                 key={row.id}
-                sx={{"&:last-child td, &:last-child th": {border: 0}}}
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 <TableCell component="th" scope="row">
                   {row.id}
@@ -134,7 +141,7 @@ const Home = () => {
                   {row.email}
                 </TableCell>
                 <TableCell className="data-row" align="right">
-                  {row.age}
+                  {row.phone}
                 </TableCell>
                 <TableCell className="data-row" align="right">
                   {row.address}
@@ -143,22 +150,18 @@ const Home = () => {
                 <TableCell className="data-row" align="right">
                   <Button variant="contained" color="secondary">
                     <Link
-                      style={{color: "white", textDecoration: "none"}}
+                      style={{ color: "white", textDecoration: "none" }}
                       to={`/edit/${row.id}`}
                     >
                       Edit
                     </Link>
                   </Button>
 
+                
                   <Button
                     variant="contained"
-                    onClick={() => {}}
-                    sx={{marginInline: "20px"}}
-                  >
-                    view
-                  </Button>
-                  <Button
-                    variant="contained"
+                    sx={{ marginInline: "20px" }}
+
                     color="error"
                     onClick={() => {
                       handleDelete(row.id);
@@ -176,7 +179,7 @@ const Home = () => {
                     aria-describedby="alert-dialog-slide-description"
                   >
                     <DialogTitle>
-                      {"Are you sure you want to delete this user?"}
+                      {"Are you sure you want to delete?"}
                     </DialogTitle>
                     <DialogContent>
                       <DialogContentText id="alert-dialog-slide-description">
@@ -189,6 +192,7 @@ const Home = () => {
                         variant="contained"
                         color="secondary"
                         onClick={handleClose}
+                        fullWidth
                       >
                         Cancel
                       </Button>
@@ -196,6 +200,7 @@ const Home = () => {
                         variant="contained"
                         color="error"
                         onClick={() => handleAgree(row.id)}
+                        fullWidth
                       >
                         Delete
                       </Button>
@@ -205,7 +210,7 @@ const Home = () => {
               </TableRow>
             ))}
             {emptyRows > 0 && (
-              <TableRow style={{height: 53 * emptyRows}}>
+              <TableRow style={{ height: 53 * emptyRows }}>
                 <TableCell colSpan={6} />
               </TableRow>
             )}

@@ -4,7 +4,7 @@ interface User {
   id: number;
   name: string;
   email: string;
-  age:number | string;
+  phone:number | string;
   address:string;
 }
 export interface UserState {
